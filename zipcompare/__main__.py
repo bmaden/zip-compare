@@ -5,7 +5,7 @@ import yaml
 from .utils import eprint, traverse_archive
 
 
-parser = argparse.ArgumentParser(description="ZIP comparisons")
+parser = argparse.ArgumentParser(prog="zipcompare", description="ZIP comparisons")
 parser.add_argument("-i", "--inspect-only", dest="inspect_only", action="store_true")
 parser.set_defaults(inspect_only=False)
 parser.add_argument("files", nargs=argparse.REMAINDER)
@@ -19,3 +19,5 @@ if args.inspect_only is True:
 
     info = traverse_archive(args.files[0])
     yaml.dump(info, sys.stdout)
+else:
+    parser.print_help()
