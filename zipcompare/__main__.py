@@ -1,4 +1,6 @@
 import argparse
+import sys
+import yaml
 
 from .utils import eprint, traverse_archive
 
@@ -15,4 +17,5 @@ if args.inspect_only is True:
         eprint("inspect requires exactly one file")
         exit(1)
 
-    traverse_archive(args.files[0])
+    info = traverse_archive(args.files[0])
+    yaml.dump(info, sys.stdout)
