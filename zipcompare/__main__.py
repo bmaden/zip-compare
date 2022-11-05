@@ -6,11 +6,14 @@ from .utils import eprint, traverse_archive
 
 
 parser = argparse.ArgumentParser(prog="zipcompare", description="ZIP comparisons")
+parser.add_argument("-o", "--output", dest="output_file")
 parser.add_argument("-i", "--inspect-only", dest="inspect_only", action="store_true")
 parser.set_defaults(inspect_only=False)
 parser.add_argument("files", nargs=argparse.REMAINDER)
 
 args = parser.parse_args()
+
+out_file_open = sys.stdout if args.output_file is None else open(args.output_file, "w")
 
 if args.inspect_only is True:
     if len(args.files) != 1:
@@ -18,6 +21,6 @@ if args.inspect_only is True:
         exit(1)
 
     info = traverse_archive(args.files[0])
-    yaml.dump(info, sys.stdout)
+    yaml.dump(info, out_file_open)
 else:
     parser.print_help()
