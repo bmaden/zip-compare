@@ -2,6 +2,7 @@ import hashlib
 import re
 import sys
 import typing
+import yaml
 import zipfile
 
 
@@ -32,6 +33,12 @@ def traverse_archive(zipfile_name: str) -> dict:
 
 def compare(infodict1, infodict2):
     pass
+
+
+def load_previous_data(filename: str) -> dict:
+    with open(filename, "r") as data_file:
+        data = yaml.full_load(data_file)
+    return data
 
 
 def eprint(msg, **kwargs):

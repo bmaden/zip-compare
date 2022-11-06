@@ -1,0 +1,11 @@
+nested:
+  zip/zipped_file.zip:
+    dir_x/file_x: dbc9213fd47665eb54e9192a984eaeae8fbae69e9b2922137a5a8ad2941af44b
+    dir_y/file_y.txt: 34e574e523ae82738ba84d2a83c8270f0384976f219527307da5ec3a4b4cc680
+    dir_y/file_z.txt: 87acb3c6cf5359f84766f872c4b74e9583ce41419ae1478c7a9945e8bbe4f1c2
+root:
+  dir_a/x/y/z/deep_file.txt: 98253840c84dd789a6140d2474486fd1d79bc11e92d01ff16d3e5cfbbae92b29
+  dir_b/testfile.txt: 3e477adeb0d32c29d8bd3f233eea90f753c8132cb7409d83977af4780acb2697
+  dir_c/testfile.txt: 45b67c48087b29108f8b0774b249dc71614a4efaee0687f7c6ae98dcea529a2f
+  root_file.txt: 6693268dc33b835212e15f14700e65edc5d65d448bd3409a4357a5b8b4f2be43
+  zip/zipped_file.zip: e285b5b49604bc9fd109c6e0c7c8da080dc626b0779028a040fd8517fc68d9a2

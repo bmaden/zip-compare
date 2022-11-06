@@ -19,3 +19,13 @@ def test_traverse_archive(resource_path):
         meta["nested"]["zip/zipped_file.zip"]["dir_y/file_y.txt"]
         == "34e574e523ae82738ba84d2a83c8270f0384976f219527307da5ec3a4b4cc680"
     )
+
+
+def test_load_old_data(resource_path):
+    yml_path = resource_path / "test.yml"
+    data = zipcompare.utils.load_previous_data(yml_path)
+    assert all(k in data.keys() for k in ("root", "nested"))
+    assert (
+        data["root"]["dir_a/x/y/z/deep_file.txt"]
+        == "98253840c84dd789a6140d2474486fd1d79bc11e92d01ff16d3e5cfbbae92b29"
+    )
