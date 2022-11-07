@@ -2,7 +2,7 @@ import argparse
 import sys
 import yaml
 
-from .utils import eprint, traverse_archive
+from .utils import compare_files, eprint, traverse_archive
 
 
 parser = argparse.ArgumentParser(prog="zipcompare", description="ZIP comparisons")
@@ -22,5 +22,7 @@ if args.inspect_only is True:
 
     info = traverse_archive(args.files[0])
     yaml.dump(info, out_file_open)
+elif len(args.files) == 2:
+    compare_files(*args.files)
 else:
     parser.print_help()

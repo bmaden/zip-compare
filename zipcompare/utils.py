@@ -31,14 +31,29 @@ def traverse_archive(zipfile_name: str) -> dict:
     return file_meta
 
 
-def compare(infodict1, infodict2):
-    pass
-
-
 def load_previous_data(filename: str) -> dict:
     with open(filename, "r") as data_file:
-        data = yaml.full_load(data_file)
-    return data
+        return yaml.full_load(data_file)
+
+
+def open_old_data_or_archive(filename: str):
+    if re.match(r".*\.ya?ml$", filename, re.IGNORECASE):
+        return load_previous_data(filename)
+    else:
+        return traverse_archive(filename)
+
+
+def compare(info_dict_1, info_dict_2):
+    print("compare")
+    print(info_dict_1)
+    print(info_dict_2)
+
+
+def compare_files(filename_1: str, filename_2: str):
+    data_1 = open_old_data_or_archive(filename_1)
+    data_2 = open_old_data_or_archive(filename_2)
+
+    return compare(data_1, data_2)
 
 
 def eprint(msg, **kwargs):
