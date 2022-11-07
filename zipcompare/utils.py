@@ -6,14 +6,17 @@ import yaml
 import zipfile
 
 
-def traverse(zipfile_name: typing.BinaryIO) -> typing.Dict[str, str]:
+def traverse(zipfile_name: typing.BinaryIO) -> typing.Dict[str, dict[str | int]]:
     data = dict()
     with zipfile.ZipFile(zipfile_name, "r") as zip_data:
         for info in zip_data.infolist():
             if info.is_dir() is False:
                 hasher = hashlib.new("sha256")
                 hasher.update(zip_data.read(info.filename))
-                data[info.filename] = hasher.hexdigest()
+                data[info.filename] = {
+                    "sha256": hasher.hexdigest(),
+                    "size": info.file_size,
+                }
 
     return data
 

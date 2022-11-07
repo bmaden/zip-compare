@@ -11,14 +11,16 @@ def test_traverse_archive(resource_path):
         assert meta["root"]["dir_b/"] == "dir"
     # file in root archive
     assert (
-        meta["root"]["dir_a/x/y/z/deep_file.txt"]
+        meta["root"]["dir_a/x/y/z/deep_file.txt"]["sha256"]
         == "98253840c84dd789a6140d2474486fd1d79bc11e92d01ff16d3e5cfbbae92b29"
     )
+    assert meta["root"]["dir_a/x/y/z/deep_file.txt"]["size"] == 36
     # file in nested archive
     assert (
-        meta["nested"]["zip/zipped_file.zip"]["dir_y/file_y.txt"]
+        meta["nested"]["zip/zipped_file.zip"]["dir_y/file_y.txt"]["sha256"]
         == "34e574e523ae82738ba84d2a83c8270f0384976f219527307da5ec3a4b4cc680"
     )
+    assert meta["nested"]["zip/zipped_file.zip"]["dir_y/file_y.txt"]["size"] == 7
 
 
 def test_load_old_data(resource_path):
@@ -26,6 +28,7 @@ def test_load_old_data(resource_path):
     data = zipcompare.utils.load_previous_data(yml_path)
     assert all(k in data.keys() for k in ("root", "nested"))
     assert (
-        data["root"]["dir_a/x/y/z/deep_file.txt"]
+        data["root"]["dir_a/x/y/z/deep_file.txt"]["sha256"]
         == "98253840c84dd789a6140d2474486fd1d79bc11e92d01ff16d3e5cfbbae92b29"
     )
+    assert data["root"]["dir_a/x/y/z/deep_file.txt"]["size"] == 36
