@@ -1,3 +1,4 @@
+import io
 import pytest
 import zipcompare.utils
 
@@ -32,3 +33,32 @@ def test_load_old_data(resource_path):
         == "98253840c84dd789a6140d2474486fd1d79bc11e92d01ff16d3e5cfbbae92b29"
     )
     assert data["root"]["dir_a/x/y/z/deep_file.txt"]["size"] == 36
+
+
+def test_compare_archive_data():
+    data1 = {
+        "path1": {"sha256": "hash_00001", "size": 100},
+        "path2": {"sha256": "hash_2xxxx", "size": 200},
+        "path3": {"sha256": "hash_00003", "size": 300},
+        "path4": {"sha256": "hash_00004", "size": 400},
+    }
+    data2 = {
+        "path1": {"sha256": "hash_00001", "size": 100},
+        "path2": {"sha256": "hash_00002", "size": 200},
+        "path3": {"sha256": "hash_00003", "size": 333},
+        "path5": {"sha256": "hash_00005", "size": 500},
+    }
+
+    expected_out = [
+        "MODIFIED,path2,200,200\n",
+        "MODIFIED,path3,300,333\n",
+        "REMOVED,path4,,\n",
+        "ADDED,path5,,\n",
+    ]
+
+    with io.StringIO() as f:
+        zipcompare.utils._compare_archive_data(data1, data2, outfile=f)
+        f.seek(0)
+
+        for i, line in enumerate(f.readlines()):
+            assert line == expected_out[i]
