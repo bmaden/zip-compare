@@ -13,3 +13,11 @@ python3 -m zipcompare --help
 ```bash
 python3 -m zipcompare -i /path/to/file.zip
 ```
+
+### Comparing files
+
+Compare two files, these can be either yaml or zip.  The yaml files are the result of the inspect command described above.
+
+```bash
+python3 -m zipcompare file1.zip file2.yml
+```
