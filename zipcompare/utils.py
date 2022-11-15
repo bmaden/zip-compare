@@ -56,13 +56,14 @@ def _compare_archive_data(data1: dict, data2: dict, outfile: typing.TextIO) -> s
 
     for file_path in sorted(list(all_keys)):
         d1 = data1.get(file_path)
+        d2 = data2.get(file_path)
+
         if d1 is None:
-            print(f"ADDED,{file_path},,", file=outfile)
+            print(f"ADDED,{file_path},,{d2['size']}", file=outfile)
             continue
 
-        d2 = data2.get(file_path)
         if d2 is None:
-            print(f"REMOVED,{file_path},,", file=outfile)
+            print(f"REMOVED,{file_path},{d1['size']},", file=outfile)
             continue
 
         if d1["sha256"] != d2["sha256"] or d1["size"] != d2["size"]:

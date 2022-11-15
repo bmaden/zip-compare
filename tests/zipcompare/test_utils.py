@@ -52,8 +52,8 @@ def test_compare_archive_data():
     expected_out = [
         "MODIFIED,path2,200,200\n",
         "MODIFIED,path3,300,333\n",
-        "REMOVED,path4,,\n",
-        "ADDED,path5,,\n",
+        "REMOVED,path4,400,\n",
+        "ADDED,path5,,500\n",
     ]
 
     with io.StringIO() as f:
