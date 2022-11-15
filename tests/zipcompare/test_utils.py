@@ -37,12 +37,14 @@ def test_load_old_data(resource_path):
 
 def test_compare_archive_data():
     data1 = {
+        "path0": {"sha256": "hash_00000", "size": 0},
         "path1": {"sha256": "hash_00001", "size": 100},
         "path2": {"sha256": "hash_2xxxx", "size": 200},
         "path3": {"sha256": "hash_00003", "size": 300},
         "path4": {"sha256": "hash_00004", "size": 400},
     }
     data2 = {
+        "path0": {"sha256": "hash_00000", "size": 0},
         "path1": {"sha256": "hash_00001", "size": 100},
         "path2": {"sha256": "hash_00002", "size": 200},
         "path3": {"sha256": "hash_00003", "size": 333},
@@ -62,3 +64,23 @@ def test_compare_archive_data():
 
         for i, line in enumerate(f.readlines()):
             assert line == expected_out[i]
+
+        # ensure all lines in expected_out were present
+        assert len(expected_out) == i + 1
+
+
+def test_compare_archive_data_equal_archives():
+    data1 = {
+        "path1": {"sha256": "hash_00001", "size": 100},
+        "path2": {"sha256": "hash_2xxxx", "size": 200},
+    }
+    data2 = {
+        "path1": {"sha256": "hash_00001", "size": 100},
+        "path2": {"sha256": "hash_2xxxx", "size": 200},
+    }
+
+    with io.StringIO() as f:
+        zipcompare.utils._compare_archive_data(data1, data2, outfile=f)
+        f.seek(0)
+
+        assert "" == f.read()
