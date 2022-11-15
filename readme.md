@@ -21,3 +21,15 @@ Compare two files, these can be either yaml or zip.  The yaml files are the resu
 ```bash
 python3 -m zipcompare file1.zip file2.yml
 ```
+
+## Coverage
+
+```bash
+# collect data
+coverage run -m pytest
+
+# report
+coverage report -m
+# (or)
+coverage html
+```
