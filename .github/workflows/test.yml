@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - "bmaden/*"
 
 env:
   TEST_RUNNER_PYTHON_VERSION: "3.10"
