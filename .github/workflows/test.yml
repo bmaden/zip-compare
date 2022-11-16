@@ -10,7 +10,7 @@ on:
       - "bmaden/*"
 
 env:
-  TEST_RUNNER_PYTHON_VERSION: 3.10
+  TEST_RUNNER_PYTHON_VERSION: "3.10"
 
 jobs:
   unit-test-python:
