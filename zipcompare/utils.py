@@ -8,7 +8,9 @@ import zipfile
 ARCHIVE_REGEX = re.compile(r".*\.(jar|war|ear|zip)$")
 
 
-def traverse(zipfile_name: typing.BinaryIO) -> typing.Dict[str, dict[str | int]]:
+def traverse(
+    zipfile_name: typing.BinaryIO | typing.IO[bytes],
+) -> typing.Dict[str, dict[str | int]]:
     data = dict()
     with zipfile.ZipFile(zipfile_name, "r") as zip_data:
         for info in zip_data.infolist():
