@@ -1,0 +1,25 @@
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+stages:
+  - validate
+  - test
+
+python-unit-tests:
+  only:
+    - merge_requests
+  image: python:3.10
+  script:
+    - pip install -U pip
+    - pip install -r requirements.txt
+    - coverage run -m pytest
+
+python-code-quality:
+  only:
+    - merge_requests
+  image: python:3.10
+  script:
+    - pip install -U pip
+    - pip install -r requirements.txt
+    - black --check --verbose .
+    - flake8
