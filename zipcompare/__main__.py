@@ -23,6 +23,6 @@ if args.inspect_only is True:
     info = traverse_archive(args.files[0])
     yaml.dump(info, out_file_open)
 elif len(args.files) == 2:
-    compare_files(*args.files)
+    compare_files(*args.files, outfile=out_file_open)
 else:
     parser.print_help()

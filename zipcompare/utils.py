@@ -87,11 +87,11 @@ def _compare_full_data_dict(info_dict_1, info_dict_2, outfile: typing.TextIO):
         )
 
 
-def compare_files(filename_1: str, filename_2: str):
+def compare_files(filename_1: str, filename_2: str, outfile: typing.TextIO):
     data_1 = open_old_data_or_archive(filename_1)
     data_2 = open_old_data_or_archive(filename_2)
 
-    return _compare_full_data_dict(data_1, data_2, sys.stdout)
+    return _compare_full_data_dict(data_1, data_2, outfile)
 
 
 def eprint(msg, **kwargs):
