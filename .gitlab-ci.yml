@@ -13,6 +13,14 @@ python-unit-tests:
     - pip install -U pip
     - pip install -r requirements.txt
     - coverage run -m pytest
+    - coverage report
+    - coverage xml
+  coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
 
 python-code-quality:
   only:
